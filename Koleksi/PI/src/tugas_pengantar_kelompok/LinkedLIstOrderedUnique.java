@@ -1,9 +1,14 @@
 package tugas_pengantar_kelompok;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
+import java.util.stream.Collectors;
 
 public class LinkedLIstOrderedUnique <E> extends LinkedList<E>{
+    ArrayList<String> dataArray = new ArrayList<String>();
     
     public boolean addSort(E value){
         ListIterator<E> iteratorData = this.listIterator();
@@ -46,6 +51,38 @@ public class LinkedLIstOrderedUnique <E> extends LinkedList<E>{
         }
         return null;
     }
+    
+    public void cetak(){
+        ListIterator<E> iterator = this.listIterator();
+        while (iterator.hasNext()) {            
+            term temp = (term) iterator.next();
+            System.out.println("term : " + temp.getNama());
+            System.out.print("Dokument : ");
+            System.out.print(temp.getDokumen());
+            System.out.println("\n");
+        }
+    }
+    
+    public void getApa(){
+        ListIterator<E> iterator = this.listIterator();
+        LinkedLIstOrderedUnique data;
+        
+        while (iterator.hasNext()) {            
+            term temp = (term) iterator.next();
+            data = temp.getDokumen();
+            ListIterator<String> it = data.listIterator();
+            while (it.hasNext()) {                
+                dataArray.add(it.next());
+            }
+        }
+        List<String> dataArray2;
+        dataArray2 = dataArray.stream().distinct().collect(Collectors.toList());
+        Iterator<String> it = dataArray2 .iterator();
+        while (it.hasNext()) {            
+            System.out.print(it.next()+", ");
+        }
+    }
+    
     
     public E get(E value){
         ListIterator<E> iterator = this.listIterator();

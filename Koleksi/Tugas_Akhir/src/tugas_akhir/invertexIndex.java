@@ -1,4 +1,4 @@
-package tugas_pengantar_kelompok;
+package tugas_akhir;
 
 import java.util.ListIterator;
 
@@ -10,12 +10,14 @@ public class invertexIndex {
     }
     
     public void search(String data){
-        ListIterator iterator;
-        term temp = new term(data);
-        iterator = kamus.listIterator();
-        while (iterator.hasNext()) {
-            
+        this.kamus.search(data);
+    }
+    
+    public void searchBanyak(String [] data){
+        for (int i = 0; i < data.length; i++) {
+            this.kamus.searchBanyakData(data[i]);
         }
+        this.kamus.getDaftarDoc();
     }
     
     public void add(String term,String dokumen){
@@ -25,22 +27,18 @@ public class invertexIndex {
         if (this.kamus.getInputString(temp.getNama()) == null) {
             //kalo data nya masih kosong
             this.kamus.addTerm(temp);
+//            dictionary.addDokumen(dokumen);
+//            this.dictionary.addDokumen(dokumen);
         }else{
+            //klk data dictionary nya dah ada
+            //cari data nya
             term data = this.kamus.getInputString(temp.getNama());
             data.addDokumen(dokumen);
+//            dictionary = new term();
+//            dictionary.setNama(term);
+//            dictionary.addDokumen(dokumen);
+//            this.kamus.addSort(dictionary);
         }
     }
-    
-    public void cetak(){
-        this.kamus.cetak();
-        System.out.println("\n");
-        this.kamus.getApa();
-    }
-
-//    @Override
-//    public String toString() {
-//        return "Kamus : \t\t"
-//                + "\n" + kamus.;
-//    }
     
 }

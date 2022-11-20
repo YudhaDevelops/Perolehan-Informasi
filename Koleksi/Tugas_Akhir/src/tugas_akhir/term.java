@@ -1,8 +1,4 @@
-package tugas_pengantar_kelompok;
-
-import java.util.Iterator;
-import java.util.ListIterator;
-
+package tugas_akhir;
 public class term {
     String nama;
     LinkedLIstOrderedUnique dokumen;
@@ -32,12 +28,5 @@ public class term {
         return dokumen;
     }
     
-    public String getStringDokumen(){
-        String doc = "";
-        for (Object data : this.dokumen) {
-            doc += "" + data + ", ";
-        }
-        return doc;
-    }
     
 }

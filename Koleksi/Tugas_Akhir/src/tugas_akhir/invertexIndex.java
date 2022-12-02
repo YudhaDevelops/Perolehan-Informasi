@@ -1,9 +1,12 @@
 package tugas_akhir;
 
+import java.util.ArrayList;
 import java.util.ListIterator;
 
 public class invertexIndex {
     LinkedLIstOrderedUnique<term> kamus;
+    LinkedLIstOrderedUnique dataDoc;
+    ArrayList<LinkedLIstOrderedUnique> dataBesar = new ArrayList<LinkedLIstOrderedUnique>();
     
     public invertexIndex() {
         kamus = new LinkedLIstOrderedUnique();
@@ -13,12 +16,6 @@ public class invertexIndex {
         this.kamus.search(data);
     }
     
-    public void searchBanyak(String [] data){
-        for (int i = 0; i < data.length; i++) {
-            this.kamus.searchBanyakData(data[i]);
-        }
-        this.kamus.getDaftarDoc();
-    }
     
     public void add(String term,String dokumen){
         term temp = new term(term);
@@ -27,18 +24,19 @@ public class invertexIndex {
         if (this.kamus.getInputString(temp.getNama()) == null) {
             //kalo data nya masih kosong
             this.kamus.addTerm(temp);
-//            dictionary.addDokumen(dokumen);
-//            this.dictionary.addDokumen(dokumen);
         }else{
-            //klk data dictionary nya dah ada
-            //cari data nya
+            //klk data dictionary nya dah ada //cari data nya
             term data = this.kamus.getInputString(temp.getNama());
             data.addDokumen(dokumen);
-//            dictionary = new term();
-//            dictionary.setNama(term);
-//            dictionary.addDokumen(dokumen);
-//            this.kamus.addSort(dictionary);
         }
     }
     
+    public void searchDoc(String value){
+        term temp = new term(value);
+        term hasil = this.kamus.get(temp);
+        System.out.println("");
+        
+        LinkedLIstOrderedUnique hasilCari = hasil.getDokumen();
+        System.out.println(hasilCari);
+    }
 }

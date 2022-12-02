@@ -1,5 +1,5 @@
 package tugas_akhir;
-public class term {
+public class term implements Comparable{
     String nama;
     LinkedLIstOrderedUnique dokumen;
 
@@ -27,6 +27,10 @@ public class term {
     public LinkedLIstOrderedUnique getDokumen() {
         return dokumen;
     }
-    
+
+    @Override
+    public int compareTo(Object o) {
+        return nama.compareTo( ( (term)o).nama);
+    }
     
 }

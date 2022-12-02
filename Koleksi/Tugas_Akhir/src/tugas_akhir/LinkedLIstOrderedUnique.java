@@ -49,42 +49,15 @@ public class LinkedLIstOrderedUnique<E> extends LinkedList<E> {
         ListIterator<E> iterator = this.listIterator();
         while (iterator.hasNext()) {
             term temp = (term) iterator.next();
-            if ((temp.getNama()).equalsIgnoreCase(value.getNama())) {
+            if ((temp.getNama()).equals(value.getNama())) {
                 System.out.println("Hasil : " + temp.getNama());
                 System.out.print("Terletak di : " + temp.getDokumen());
                 System.out.println("");
-            }
-        }
-    }
-
-    public void searchBanyakData(String data) {
-        System.out.println("Data yang di cari : " + data);
-        term dataCari = new term(data);
-        ListIterator<E> iterator = this.listIterator();
-        while (iterator.hasNext()) {
-            term temp = (term) iterator.next();
-            if ((temp.getNama()).equalsIgnoreCase(dataCari.getNama())) {
-                System.out.println("Hasil : " + temp.getNama());
-                System.out.print("Terletak di : " + temp.getDokumen());
-                System.out.println("");
-
-                dataDokumen = temp.getDokumen();
-                ListIterator<String> it = dataDokumen.listIterator();
-                while (it.hasNext()) {
-                    dataTampung.add(it.next());
-                }
             }
         }
     }
 
     public void getDaftarDoc() {
-        //not use distinct
-//        Iterator<String> it = dataTampung.iterator();
-//        System.out.print("Berada Di : ");
-//        while (it.hasNext()) {
-//            System.out.print(it.next() + ", ");
-//        }
-        
         //use distinct
         List<String> dataUniq = dataTampung.stream().distinct().collect(Collectors.toList());
         Iterator<String> it = dataUniq.iterator();

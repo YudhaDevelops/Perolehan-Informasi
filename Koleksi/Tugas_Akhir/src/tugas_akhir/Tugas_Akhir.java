@@ -17,10 +17,10 @@ public class Tugas_Akhir {
         if (name.exists()) {
             if (name.isDirectory()) {
                 String directory[] = name.list();
-                System.out.println("\n\nDirectory contents : \n");
+//                System.out.println("\n\nDirectory contents : \n");
                 
                 for (String directoryName : directory) {
-                    System.out.printf("%s\n", directoryName);
+//                    System.out.printf("%s\n", directoryName);
                     
                     try {
                         input = new Scanner (new File(name.getAbsolutePath()+"\\"+directoryName));
@@ -33,8 +33,8 @@ public class Tugas_Akhir {
                                     if (token.isEmpty()) {
                                         continue;
                                     }else{
-                                        System.out.println(directoryName + " " + token);
-                                        invertex.add(token, directoryName);
+//                                        System.out.println(directoryName + " " + token);
+                                        invertex.add(token.toLowerCase(), directoryName);
                                     }
                                 }
                             }//end while
@@ -58,28 +58,8 @@ public class Tugas_Akhir {
         
         input = new Scanner(System.in);
 
-        //input jumlah kata yang ingin di cari
-        System.out.print("Masukkan Jumlah Kata Yg Ingin di Cari : ");
-        int jmlh = input.nextInt();
-//        int jmlh = 2;
-        
-        
-        query = new String [jmlh];
-//        String []query = {"dan","jalan"};
-        for (int i = 0; i < jmlh; i++) {
-        //inputan cari data
-            System.out.print("Input Kata Yang Ingin Di Cari : ");
-            String data = input.next();
-            query[i] = data;
-        }
-        
-        System.out.println("Data yang di cari satu persatu\n");
-        for (int i = 0; i < query.length; i++) {
-            invertex.search(query[i]);
-        }
-        System.out.println("\n\n\n");
-        System.out.println("Data Yang di cari sekaligus berdasarkan jumlah inputan");
-        invertex.searchBanyak(query);
+        //get dokumen and
+        System.out.println("\n\nGet Dokumen And");
+        invertex.searchDoc("jalan");
     }
-    
 }

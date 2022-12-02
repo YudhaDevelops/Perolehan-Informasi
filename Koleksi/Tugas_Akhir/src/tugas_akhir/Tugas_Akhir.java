@@ -60,6 +60,6 @@ public class Tugas_Akhir {
 
         //get dokumen and
         System.out.println("\n\nGet Dokumen And");
-        invertex.searchDoc("jalan");
+        invertex.searchDoc("jalan raya");
     }
 }

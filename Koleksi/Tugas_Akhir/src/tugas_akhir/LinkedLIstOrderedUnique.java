@@ -67,7 +67,7 @@ public class LinkedLIstOrderedUnique<E> extends LinkedList<E> {
         }
     }
 
-    public term getInputString(String value) {
+    public term getKamus(String value) {
         ListIterator<E> iterator = this.listIterator();
         while (iterator.hasNext()) {
             term temp = (term) iterator.next();

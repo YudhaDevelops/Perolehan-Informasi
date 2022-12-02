@@ -21,12 +21,12 @@ public class invertexIndex {
         term temp = new term(term);
         temp.setNama(term);
         temp.addDokumen(dokumen);
-        if (this.kamus.getInputString(temp.getNama()) == null) {
+        if (this.kamus.get(temp) == null) {
             //kalo data nya masih kosong
             this.kamus.addTerm(temp);
         }else{
             //klk data dictionary nya dah ada //cari data nya
-            term data = this.kamus.getInputString(temp.getNama());
+            term data = this.kamus.get(temp);
             data.addDokumen(dokumen);
         }
     }
@@ -34,9 +34,16 @@ public class invertexIndex {
     public void searchDoc(String value){
         term temp = new term(value);
         term hasil = this.kamus.get(temp);
-        System.out.println("");
-        
-        LinkedLIstOrderedUnique hasilCari = hasil.getDokumen();
-        System.out.println(hasilCari);
+        if (hasil != null) {
+            LinkedLIstOrderedUnique hasilCari = hasil.getDokumen();
+            cetakHasil(hasilCari);
+            System.out.println(hasilCari.size());
+        }else{
+            System.out.println("Data Yang Anda Cari Tidak Ada");
+        }
+    }
+    
+    public void cetakHasil(LinkedLIstOrderedUnique data){
+        System.out.println(data);
     }
 }

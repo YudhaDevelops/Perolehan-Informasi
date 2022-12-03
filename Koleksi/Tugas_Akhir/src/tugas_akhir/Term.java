@@ -1,13 +1,13 @@
 package tugas_akhir;
-public class term implements Comparable{
+public class Term implements Comparable{
     String nama;
     LinkedLIstOrderedUnique dokumen;
 
-    public term(String nama) {
+    public Term(String nama) {
         this.nama = nama;
         dokumen = new LinkedLIstOrderedUnique();
     }
-    public term() {
+    public Term() {
         this.nama = null;
         dokumen = new LinkedLIstOrderedUnique();
     }
@@ -30,7 +30,7 @@ public class term implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        return nama.compareTo( ( (term)o).nama);
+        return nama.compareTo( ( (Term)o).nama);
     }
     
 }

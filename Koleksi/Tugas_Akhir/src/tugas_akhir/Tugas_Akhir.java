@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Tugas_Akhir {
     public static void main(String[] args) {
-        invertexIndex invertex = new invertexIndex();
+        InvertexIndex invertex = new InvertexIndex();
         int jumlah;
         //baca file 
         String path = "..\\Koleksi";
@@ -18,25 +19,28 @@ public class Tugas_Akhir {
             if (name.isDirectory()) {
                 String directory[] = name.list();
 //                System.out.println("\n\nDirectory contents : \n");
-                
+                System.out.println("\n--------------------------------------");
                 for (String directoryName : directory) {
 //                    System.out.printf("%s\n", directoryName);
-                    
                     try {
                         input = new Scanner (new File(name.getAbsolutePath()+"\\"+directoryName));
-                        
+                        System.out.println("\n Memasukkan Data Dari File " + directoryName + " :");
                         try {
                             while (input.hasNext()) {
                                 String sentence = input.nextLine();
-                                String[] tokens = sentence.split(" ");
-                                for (String token : tokens) {
-                                    if (token.isEmpty()) {
-                                        continue;
-                                    }else{
-//                                        System.out.println(directoryName + " " + token);
-                                        invertex.add(token.toLowerCase(), directoryName);
-                                    }
+                                StringTokenizer st = new StringTokenizer(sentence," ~!@#$%^&*()_+`1234567890-={}|:<>?[]\";'\\,./'");
+                                while (st.hasMoreTokens()) {                                    
+                                    invertex.add(st.nextToken(), directoryName);
                                 }
+//                                String[] tokens = sentence.split(" ");
+//                                for (String token : tokens) {
+//                                    if (token.isEmpty()) {
+//                                        continue;
+//                                    }else{
+////                                        System.out.println(directoryName + " " + token);
+//                                        invertex.add(token.toLowerCase(), directoryName);
+//                                    }
+//                                }
                             }//end while
                         } catch (NoSuchElementException elementException) {
                             System.out.println("File improperly formed.");
@@ -47,8 +51,8 @@ public class Tugas_Akhir {
                         System.out.println("Error opening file.");
                         System.exit(1);
                     }
-//                    System.out.println("");
                 }
+                System.out.println("\n--------------------------------------");
             }else{
                 System.out.println("Tidak nemu");
             }
@@ -57,18 +61,19 @@ public class Tugas_Akhir {
         }
         
         input = new Scanner(System.in);
-        do{
-            System.out.print("Masukkan Berapa Jumlah Query :");
-            jumlah = input.nextInt();
-        }while(jumlah <= 0);
+        System.out.println("Masukkan Query yang di pisah kan dengan spasi");
+        System.out.print("Masukkan Query : ");
+        String data = input.nextLine();
         
-        String [] query = new String[jumlah];
-        for (int i = 0; i < query.length; i++) {
-            System.out.print("Query ke-" + i + ": ");
-            String data = input.next();
-            query[i] = data;
+        StringTokenizer st = new StringTokenizer(data," ~!@#$%^&*()_+`1234567890-={}|:<>?[],./'");
+        
+        String [] query = new String[st.countTokens()];
+        int i = 0;
+        while (st.hasMoreTokens()) {            
+            query[i] = st.nextToken();
+            i++;
         }
-        System.out.print("Hasil Query Berada Di Dokumen : ");
+        System.out.println("");
         invertex.searchDoc(query);
     }
 }

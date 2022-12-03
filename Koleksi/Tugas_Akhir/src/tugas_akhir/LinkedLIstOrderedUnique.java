@@ -1,6 +1,5 @@
 package tugas_akhir;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,8 +9,6 @@ import java.util.stream.Collectors;
 public class LinkedLIstOrderedUnique<E> extends LinkedList<E> {
 
     LinkedLIstOrderedUnique dataDokumen;
-    ArrayList<String> dataTampung = new ArrayList<String>();
-
     public boolean addSort(E value) {
         ListIterator<E> iteratorData = this.listIterator();
         while (iteratorData.hasNext()) {
@@ -28,10 +25,10 @@ public class LinkedLIstOrderedUnique<E> extends LinkedList<E> {
         return true;
     }
 
-    public boolean addTerm(term value) {
+    public boolean addTerm(Term value) {
         ListIterator<E> iteratorData = this.listIterator();
         while (iteratorData.hasNext()) {
-            term data = (term) iteratorData.next();
+            Term data = (Term) iteratorData.next();
             if (((Comparable) data.getNama()).compareTo(value.getNama()) > 0) {
                 iteratorData.previous();
                 iteratorData.add((E) value);
@@ -45,10 +42,10 @@ public class LinkedLIstOrderedUnique<E> extends LinkedList<E> {
     }
 
     public void search(String data) {
-        term value = new term(data);
+        Term value = new Term(data);
         ListIterator<E> iterator = this.listIterator();
         while (iterator.hasNext()) {
-            term temp = (term) iterator.next();
+            Term temp = (Term) iterator.next();
             if ((temp.getNama()).equals(value.getNama())) {
                 System.out.println("Hasil : " + temp.getNama());
                 System.out.print("Terletak di : " + temp.getDokumen());
@@ -57,20 +54,10 @@ public class LinkedLIstOrderedUnique<E> extends LinkedList<E> {
         }
     }
 
-    public void getDaftarDoc() {
-        //use distinct
-        List<String> dataUniq = dataTampung.stream().distinct().collect(Collectors.toList());
-        Iterator<String> it = dataUniq.iterator();
-        System.out.print("\nBerada di : ");
-        while (it.hasNext()) {
-            System.out.print(it.next() + ", ");
-        }
-    }
-
-    public term getKamus(String value) {
+    public Term getKamus(String value) {
         ListIterator<E> iterator = this.listIterator();
         while (iterator.hasNext()) {
-            term temp = (term) iterator.next();
+            Term temp = (Term) iterator.next();
             if (((Comparable) temp.getNama()).compareTo(value) == 0) {
                 return temp;
             }

@@ -6,7 +6,7 @@ import java.util.ListIterator;
 public class invertexIndex {
 
     LinkedLIstOrderedUnique<term> kamus;
-    LinkedLIstOrderedUnique dataDoc;
+
     ArrayList<LinkedLIstOrderedUnique> dataBesar = new ArrayList<LinkedLIstOrderedUnique>();
 
     public invertexIndex() {
@@ -23,7 +23,7 @@ public class invertexIndex {
         temp.addDokumen(dokumen);
         if (this.kamus.get(temp) == null) {
             //kalo data nya masih kosong
-            this.kamus.addTerm(temp);
+            this.kamus.addSort(temp);
         } else {
             //klk data dictionary nya dah ada //cari data nya
             term data = this.kamus.get(temp);
@@ -31,11 +31,11 @@ public class invertexIndex {
         }
     }
 
-    public void searchDoc(String value) {
-        String [] key = value.split(" ");
-        
-        if (key.length == 1) {
-            term temp = new term(value);
+    public void searchDoc(String[] data) {
+//        ArrayList<term> dataTemp = new ArrayList<>();
+
+        if (data.length == 1) {
+            term temp = new term(data[0]);
             term hasil = this.kamus.get(temp);
             if (hasil != null) {
                 LinkedLIstOrderedUnique hasilCari = hasil.getDokumen();
@@ -44,35 +44,50 @@ public class invertexIndex {
             } else {
                 System.out.println("Data Yang Anda Cari Tidak Ada");
             }
-        }else{
-            for (int i = 0; i < key.length; i++) {
-                
+        } else {
+            LinkedLIstOrderedUnique<term> dataBaru = new LinkedLIstOrderedUnique<>();
+            for (int i = 0; i < data.length; i++) {
+                term temp = new term(data[i]);
+                term hasil = this.kamus.getKamus(temp.getNama());
+                if (hasil != null) {
+                    dataBaru.add(hasil);
+                }
+            }
+
+            term tempp = new term();
+            for (int i = 0; i < dataBaru.size() - 1; i++) {
+                for (int j = 0; j < dataBaru.size() - 1; j++) {
+                    if (dataBaru.get(j).getDokumen().size() > dataBaru.get(j + 1).getDokumen().size()) {
+                        tempp = dataBaru.get(j);
+                        dataBaru.set(j, dataBaru.get(j + 1));
+                        dataBaru.set(j + 1, tempp);
+                    }
+                }
+            }
+
+            if (dataBaru.size() > 1) {
+                LinkedLIstOrderedUnique docKamus1 = dataBaru.get(0).getDokumen();
+                for (int i = 1; i < dataBaru.size(); i++) {
+                    LinkedLIstOrderedUnique docKamus2 = dataBaru.get(i).getDokumen();
+                    docKamus1 = intersec(docKamus1, docKamus2);
+                }
+                System.out.println("Hasil : " + docKamus1);
+            }
+
+            System.out.println("");
+        }
+    }
+
+    public LinkedLIstOrderedUnique intersec(LinkedLIstOrderedUnique data1, LinkedLIstOrderedUnique data2) {
+        LinkedLIstOrderedUnique temp = new LinkedLIstOrderedUnique();
+        for (int i = 0; i < data2.size(); i++) {
+            for (int j = 0; j < data1.size(); j++) {
+                if (data2.get(i).equals(data1.get(j))) {
+                    temp.add(data2.get(i));
+                }
             }
         }
-    }
-
-    public void searchDuaData(String data) {
-//        term temp1 = new term(data1);
-//        term temp2 = new term(data2);
-
-//        term doc1 = this.kamus.get(temp1);
-//        term doc2 = this.kamus.get(temp2);
-
-//        LinkedLIstOrderedUnique hasilData1 = doc1.getDokumen();
-//        LinkedLIstOrderedUnique hasilData2 = doc2.getDokumen();
-        
-//        if (hasilData1.size() > hasilData2.size()) {
-//            intersec(hasilData1,hasilData2);
-//        }else{
-//            intersec(hasilData2,hasilData1);
-//        }
-    }
-    
-    public void intersec(LinkedLIstOrderedUnique data1, LinkedLIstOrderedUnique data2){
-        LinkedLIstOrderedUnique temp;
-        for (int i = 0; i < data1.size(); i++) {
-            
-        }
+        return temp;
     }
 
     public void cetakHasil(LinkedLIstOrderedUnique data) {

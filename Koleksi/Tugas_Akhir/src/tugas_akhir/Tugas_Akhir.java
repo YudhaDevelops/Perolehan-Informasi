@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Tugas_Akhir {
     public static void main(String[] args) {
         invertexIndex invertex = new invertexIndex();
-        String [] query;
         //baca file 
         String path = "..\\Koleksi";
         Scanner input;
@@ -33,7 +32,7 @@ public class Tugas_Akhir {
                                     if (token.isEmpty()) {
                                         continue;
                                     }else{
-//                                        System.out.println(directoryName + " " + token);
+                                        System.out.println(directoryName + " " + token);
                                         invertex.add(token.toLowerCase(), directoryName);
                                     }
                                 }
@@ -60,6 +59,8 @@ public class Tugas_Akhir {
 
         //get dokumen and
         System.out.println("\n\nGet Dokumen And");
-        invertex.searchDoc("jalan raya");
+        String [] query = {"jalan","tempat"};
+//        String [] query = {"jalan"};
+        invertex.searchDoc(query);
     }
 }

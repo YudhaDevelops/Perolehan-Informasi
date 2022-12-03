@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Tugas_Akhir {
     public static void main(String[] args) {
         invertexIndex invertex = new invertexIndex();
+        int jumlah;
         //baca file 
         String path = "..\\Koleksi";
         Scanner input;
@@ -32,7 +33,7 @@ public class Tugas_Akhir {
                                     if (token.isEmpty()) {
                                         continue;
                                     }else{
-                                        System.out.println(directoryName + " " + token);
+//                                        System.out.println(directoryName + " " + token);
                                         invertex.add(token.toLowerCase(), directoryName);
                                     }
                                 }
@@ -46,7 +47,7 @@ public class Tugas_Akhir {
                         System.out.println("Error opening file.");
                         System.exit(1);
                     }
-                    System.out.println("");
+//                    System.out.println("");
                 }
             }else{
                 System.out.println("Tidak nemu");
@@ -56,11 +57,18 @@ public class Tugas_Akhir {
         }
         
         input = new Scanner(System.in);
-
-        //get dokumen and
-        System.out.println("\n\nGet Dokumen And");
-        String [] query = {"jalan","tempat"};
-//        String [] query = {"jalan"};
+        do{
+            System.out.print("Masukkan Berapa Jumlah Query :");
+            jumlah = input.nextInt();
+        }while(jumlah <= 0);
+        
+        String [] query = new String[jumlah];
+        for (int i = 0; i < query.length; i++) {
+            System.out.print("Query ke-" + i + ": ");
+            String data = input.next();
+            query[i] = data;
+        }
+        System.out.print("Hasil Query Berada Di Dokumen : ");
         invertex.searchDoc(query);
     }
 }

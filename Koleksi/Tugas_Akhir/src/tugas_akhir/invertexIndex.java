@@ -40,7 +40,6 @@ public class invertexIndex {
             if (hasil != null) {
                 LinkedLIstOrderedUnique hasilCari = hasil.getDokumen();
                 cetakHasil(hasilCari);
-                System.out.println(hasilCari.size());
             } else {
                 System.out.println("Data Yang Anda Cari Tidak Ada");
             }
@@ -71,10 +70,12 @@ public class invertexIndex {
                     LinkedLIstOrderedUnique docKamus2 = dataBaru.get(i).getDokumen();
                     docKamus1 = intersec(docKamus1, docKamus2);
                 }
-                System.out.println("Hasil : " + docKamus1);
+                if (docKamus1.size() < 1) {
+                    System.out.println("Query Tidak Di Temukan Di Dokumen Manapun");
+                }else{
+                    cetakHasil(docKamus1);
+                }
             }
-
-            System.out.println("");
         }
     }
 
@@ -91,6 +92,9 @@ public class invertexIndex {
     }
 
     public void cetakHasil(LinkedLIstOrderedUnique data) {
-        System.out.println(data);
+        for (int i = 0; i < data.size(); i++) {
+            System.out.print(data.get(i) + ", ");
+        }
+        System.out.println("");
     }
 }
